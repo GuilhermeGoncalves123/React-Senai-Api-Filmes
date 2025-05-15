@@ -1,0 +1,73 @@
+/* Mae de todos */
+
+.main-login{
+display: flex;
+height: 100vh;
+}
+
+
+
+.banner{
+    background-image: url("../../assets/img/fundoLogin.png") ;
+    flex: 1;
+
+
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+
+.section_login img{
+    width: 280px ;
+}
+
+
+
+.form_login h1{
+
+    text-transform: uppercase;
+}
+
+.form_login{
+    display: flex;
+    width: 70%;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    height: 50%;
+}
+
+.campo_input{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.campos_login{
+    width: 100%;
+}
+
+.campo_input input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 7px ;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    box-sizing: border-box;
+    box-shadow: 1px 4px 4px 0px #00000045 ;
+}
+
+
+/* RESPONSIVIDADE */
+ 
+@media screen and (max-width: 768px ){
+    /* 0px -> 768px */
+
+    .banner{
+        display: none;
+    }
+    
+}
