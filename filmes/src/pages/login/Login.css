@@ -1,42 +1,51 @@
-/* Mae de todos */
-
-.main-login{
-display: flex;
-height: 100vh;
+/* A mãe de todos: */
+.main_login{
+    display: flex;
+    height: 100vh;
 }
 
-
-
+/* Banner da esquerda: */
 .banner{
-    background-image: url("../../assets/img/fundoLogin.png") ;
+    background-image: url("../../assets/img/fundoLogin.png");
     flex: 1;
 
-
+    /* Modificar algumas caracteristicas da imagem: */
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
 }
 
+/* Form de login da direita: */
+.section_login{
+    flex: 1;
+    
+    background-color: #CC3F55;
 
-
-.section_login img{
-    width: 280px ;
-}
-
-
-
-.form_login h1{
-
-    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .form_login{
-    display: flex;
+    color: white;
+
     width: 70%;
+    height: 50%;
+
+    display: flex;
     justify-content: space-around;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 50%;
+}
+
+.form_login h1{
+    text-transform: uppercase;
+}
+
+.campos_login{
+    width: 100%;
 }
 
 .campo_input{
@@ -45,29 +54,24 @@ height: 100vh;
     margin-bottom: 20px;
 }
 
-.campos_login{
-    width: 100%;
-}
+.campo_input input{
+    height: 30px;
 
-.campo_input input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 7px ;
+    padding: 0 10px;
+
     border: none;
     outline: none;
-    border-radius: 8px;
-    box-sizing: border-box;
-    box-shadow: 1px 4px 4px 0px #00000045 ;
+
+    border-radius: 6px;
+
+    /* box-shadow: ; */
 }
 
+/* REPONSIVIDADE */
 
-/* RESPONSIVIDADE */
- 
-@media screen and (max-width: 768px ){
-    /* 0px -> 768px */
-
+/* Me de algumas caracteristicas a partir de um tamanho de tela */
+@media screen and (max-width: 768px){
     .banner{
         display: none;
     }
-    
 }

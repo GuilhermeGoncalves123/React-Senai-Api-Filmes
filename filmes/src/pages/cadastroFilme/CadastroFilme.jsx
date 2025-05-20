@@ -1,26 +1,25 @@
-import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
-import Cadastro from "../../components/cadastro/Cadastro";
-import Lista from "../../components/lista/Lista";
 // import { Fragment } from "react";
+import Cadastro from "../../components/cadastro/Cadastro";
+import Footer from "../../components/footer/Footer";
+import Header from "../../components/header/Header";
+import Lista from "../../components/lista/Lista";
 
 const CadastroFilme = () => {
-  return (
-    <>
-      <Header />
-      <main>
-        <Cadastro tituloCadastro="Cadastro de Filme"
-         placeholder ="Filme"
-       
-        />
-        
-        <Lista 
-          ListaTitulo ="Lista De Filme"
-        />
-      </main>
-      <Footer />
-    </>
-  );
-};
+    return (
+        <>
+            <Header />
+            <main>
+                <Cadastro
+                    tituloCadastro="Cadastro de Filme"
+                    placeholder="Filme"
+                />
+                <Lista
+                titulo = "Lista de Filmes"
+                />
+            </main>
+            <Footer />
+        </>
+    )
+}
 
 export default CadastroFilme;

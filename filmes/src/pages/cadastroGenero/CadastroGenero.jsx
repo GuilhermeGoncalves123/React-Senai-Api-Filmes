@@ -1,131 +1,149 @@
 import { useEffect, useState } from "react";
+import api from "../../Services/services";
+import Swal from 'sweetalert2'
 
-//import components
+// Inportação de componentes:
+import Cadastro from "../../components/cadastro/Cadastro";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
-import Cadastro from "../../components/cadastro/Cadastro";
 import Lista from "../../components/lista/Lista";
 
-import api from "../../Services/services"
 
 const CadastroGenero = () => {
 
+    // nome do genero
     const [genero, setGenero] = useState("");
-    const [listarGenero, setListaGenero] = useState([]);
-    function alerta(icone, mensagem){
-       async function cadastrarGenero(e){
-       }
-      const Toast = Swal.mixin({
-  toast: true,
-  position: "top-end",
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.onmouseenter = Swal.stopTimer;
-    toast.onmouseleave = Swal.resumeTimer;
-  }
-});
-Toast.fire({
-  icon: "icone",
-  title: "mensagem"
-});
-    }
+    const [listaGenero, setListaGenero] = useState([])
+    const [deletaGenero, setDeletaGenero] = useState();
 
-       async function cadastrarGenero(evt){
-        evt.preventDefault();
-
-       function ExluirGenero() {
-        alert("Genero excluido")
-       }
-      
-       async function AtualizarGenero () {
-        alert("Genero Atualizado")
-       }
-
-
-
-
-
-
-
-
-
-
-
-        //verificar se o input esta vindo vazio
-        // trim: apaga os espaços
-        if(genero.trim() != ""){
-            
-            try{
-                //cadastrar um genero: post
-                await api.post("genero",{nome: genero});
-                 alerta("sucess", "Cadastro realizado com sucesso")
-                
-            }catch(error){
-                alerta("error", "Erro! entre em contato com o nosso suporte")
-                console.log(error);
+    function alertar(icone, mensagem) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
             }
-        }else{
-           alerta("info", "Deu ruim")
+        });
+        Toast.fire({
+            icon: icone,
+            title: mensagem
+        });
+    }
+    async function cadastrarGenero(e) {
+        e.preventDefault();
+        if (genero.trim() != "") {
+
+            // try => tentar
+            // catch => lança a exceção
+            try {
+                // cadastrar um genero: post
+                await api.post("genero", { nome: genero });
+                alertar("success", "Cadastro realizado com sucesso!")
+                setGenero("")
+            } catch (error) {
+                alertar("error", "Erro! entre em contato com o suporte")
+            }
+        } else {
+            alertar("error", "Preencha o campo vazio")
         }
-
-    //try => tentar(o esperado)
-    //catch => pega a exceção
-
-
-
-
-    
+    }
+    //sincrono => Acontece simultaneamente
+    //assincrono => Espera algo/resposta para ir em outro bloco do codigo
     async function listarGenero(){
-      try {
-        const resposta = await api.get("genero");
-        setListaGenero(resposta.data)
-        
-      } catch (error) {
-        console.log(error);
-      }
-    }
-      
+        try {
+            //await => Aguarda uma resp da solicitação
+            const resposta = await api.get("genero");
+
+            // console.log(resposta);
+
+            setListaGenero(resposta.data);
+            console.log(resposta.data);
+            
+        } catch (error) {
+            console.log(error);
+        }
     }
 
+    //Funcao excluir genero
+    async function removerGenero(idGenero, warning) {
+        try {
+            const excluirGenero = await api.delete(`genero/${idGenero}`)
+            setDeletaGenero(excluirGenero.data)
+
+            Swal.fire({
+                title: "Você tem certeza que quer excluir?",
+                text: "Você não vai poder reverter isso!",
+                icon: warning,
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sim, deletar isso!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deletado!",
+                        text: "Deletado com sucesso!",
+                        icon: "success"
+                    });
+                }
+            });
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
 
-    //TESTE: validar o genero
+    // teste: validar o genero
     // useEffect(() => {
     //     console.log(genero);
-    // },[genero]);
-    //fim do teste
+    // },[genero])
+    // Fim do teste
 
-    useEffect(()=>{
-      listarGenero();
-      
-    },[])
+    // Teste: validar o que esta sendo passado como resposta em listaGenero
+    useEffect(() => {
+        listarGenero();
+    }, [listarGenero])
 
-    return(
+    // Fim do teste
+
+
+
+
+
+
+
+    return (
         <>
-           <Header/>
-           <main>
-                <Cadastro tituloCadastro="Cadastro de Gênero"
-                visibilidade = "none"
-                placeholder = "gênero"
+            <Header />
+            <main>
+                <Cadastro
+                    tituloCadastro="Cadastro de Gênero"
+                    visibilidade="none"
+                    placeholder="Gênero"
+                    // Atribuindo a função:
+                    funcCadastro={cadastrarGenero}
+                    // Atribuindo o valor ao input
+                    valorInput={genero}
+                    //Atribuindo a função que atualiza o meu genero
+                    setValorInput={setGenero}
+                />
+                <Lista
+                    titulo="Lista dos Gêneros"
+                    visible="none"
 
-                //atribuindo a função:
-                funcCadastro = {cadastrarGenero}
-                //atribuindo o valor do input:
-                valorInput = {genero}
-                //atibuindo a função que atualiza o meu genero
-                setValorInput ={setGenero}
+                    //atribuir para lista, o meu estado atual:
+                    lista = {listaGenero}
+
+                    deletar={removerGenero}
                 />
-                
-                <Lista ListaTitulo="Lista de Gêneros"
-                visible="none"
-                lista = {listarGenero}
-                />
-           </main>
-           <Footer/>
-       </> 
+            </main>
+            <Footer />
+        </>
     )
-
+}
 
 export default CadastroGenero;

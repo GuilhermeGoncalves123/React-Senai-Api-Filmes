@@ -1,10 +1,12 @@
 import './App.css';
-import Rotas from "./Routes/routes";
+import Rotas from "./Routes/routes"
 
 function App() {
   return (
- <Rotas/>
+
+    <Rotas />
+
   );
 }
-//qualquer um pode acessar o app, por causa do comando abaixo
+//Ele libera a função para ser usada
 export default App;

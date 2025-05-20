@@ -1,22 +1,12 @@
-button {
-    width: 59%;
-    padding: 12px;
-    background-color: #640016;
-    color: white;
+.botao{
+    /* padding: 5px 100px; */
     border: none;
-    border-radius: 8px;
- 
     cursor: pointer;
-    box-shadow: 1px 4px 4px 0px #00000045 ;
-} 
+    background-color: #73061B;
+    color: white;
+    border-radius: 6px;
+    width: 200px;
+    height: 30px;
 
-.botao {
-    width: 30%;
-    padding: 12px;
-    background-color: #640016;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 1px 4px 4px 0px #00000045;
-  }
+    font-weight: bolder;
+}
