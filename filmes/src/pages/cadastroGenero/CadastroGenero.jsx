@@ -13,7 +13,8 @@ const CadastroGenero = () => {
 
     // nome do genero
     const [genero, setGenero] = useState("");
-    const [listaGenero, setListaGenero] = useState([])
+    const [listaGenero, setListaGenero] = useState([]);
+    const [filme, setfilme] = useState = ("");
     const [deletaGenero, setDeletaGenero] = useState();
 
     function alertar(icone, mensagem) {
@@ -96,6 +97,32 @@ const CadastroGenero = () => {
             console.log(error)
         }
     }
+   async function editarGenero(genero){
+    //console.log(genero);    	
+
+const { value: novoGenero } = await Swal.fire({
+  title: "Modifique seu genero",
+  input: "text",
+  inputLabel: "Novo genero",
+  inputValue : genero.nome,
+  showCancelButton: true,
+  inputValidator: (value) => {
+    if (!value) {
+      return "O campo não pode estar vazio!";
+    }
+  }
+});
+if (novoGenero) {
+    try {
+        api.put(`genero/${genero.idGenero}`,{nome: novoGenero})
+        Swal.fire(`O genero modificado ${novoGenero}`);
+        listaGenero();
+        
+    } catch (error) {
+        
+    }
+}
+    }
 
     // teste: validar o genero
     // useEffect(() => {
@@ -106,7 +133,7 @@ const CadastroGenero = () => {
     // Teste: validar o que esta sendo passado como resposta em listaGenero
     useEffect(() => {
         listarGenero();
-    }, [listarGenero])
+    }, [listaGenero])
 
     // Fim do teste
 
@@ -139,6 +166,9 @@ const CadastroGenero = () => {
                     lista = {listaGenero}
 
                     deletar={removerGenero}
+                    funcEditar={editarGenero}
+
+
                 />
             </main>
             <Footer />

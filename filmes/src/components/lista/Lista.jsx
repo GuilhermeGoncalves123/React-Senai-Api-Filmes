@@ -27,7 +27,12 @@ const Lista = (props) => {
                                         {item.nome}
                                     </td>
                                     <td data-cell="Gênero" style={{ display: props.visible }}>Ação</td>
-                                    <td data-cell="Editar"><img src={Editar} alt="Imagem de uma caneta" /></td>
+                                    <td data-cell="Editar">
+                                        <button onClick={()=> {props.funcEditar(item)}}>
+                                        <img src={Editar} alt="Imagem de uma caneta" />
+                                        </button>
+                                        </td>
+
                                     <td data-cell="Excluir"><img src={Excluir} alt="Imagem de uma caixa de lixo" onClick={() => props.deletar(item.idGenero)} style={{ cursor: "pointer" }} /></td>
                                 </tr>
                             ))

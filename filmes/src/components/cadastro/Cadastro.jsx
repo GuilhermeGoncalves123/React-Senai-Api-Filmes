@@ -22,11 +22,13 @@ const Cadastro = (props) => {
                     </div>
                     <div className="campo_cad_genero" style={{ display: props.visibilidade }}>
                         <label htmlFor="genro">Gênero</label>
-                        <select name="genero" id="">
+                    <select name="genero" id="" 
+                    value={props.ValorSelect} 
+                    onChange={(e) => props.setValorSelect(e.target.value)}>
                             <option value="" disabled selected>Selecione</option>
-                            <option value="">op 1</option>
-                            <option value="">op 2</option>
-                            <option value=""> op 3</option>
+                            {props.lista && props.lista.length > 0 && props.lista.map((itemGenero) =>
+                                <option value={itemGenero.idGenero}>{itemGenero.nome}</option>
+                            )}
                         </select>
                     </div>
                     <Botao nomeDoBotao="Cadastrar" />
